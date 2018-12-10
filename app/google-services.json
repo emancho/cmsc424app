@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "716547659790",
+    "firebase_url": "https://cmsc423db.firebaseio.com",
+    "project_id": "cmsc423db",
+    "storage_bucket": "cmsc423db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716547659790:android:4ac4adbd0b0fd07b",
+        "android_client_info": {
+          "package_name": "com.example.vizva.sns_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716547659790-bfc2k4on6mnunmr6ve430572vn5su1n5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vizva.sns_app",
+            "certificate_hash": "6647e4455fecf87fe171c9114cbdd8dfad5c7325"
+          }
+        },
+        {
+          "client_id": "716547659790-m1jre0hedqa9cc66nur7k9g9hrr0hdp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm9c8Cf1IQaDaUwEjUbWfQ7gmeXmw-b1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716547659790-m1jre0hedqa9cc66nur7k9g9hrr0hdp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
