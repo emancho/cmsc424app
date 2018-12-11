@@ -139,7 +139,7 @@ public class registionActivity extends Activity {
                 startActivity(new Intent(registionActivity.this, MainActivity.class));
             }
         });
-        
+
         if (ContextCompat.checkSelfPermission(registionActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
@@ -484,33 +484,6 @@ class BackgroundTask extends AsyncTask<String,Void,String> {
 //            startActivity(new Intent(getApplicationContext(), HomeActivity.class ));
 //        }
 //    }}
-
-
-public void onSelfClick(View view){
-    regButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    });
-    if (ContextCompat.checkSelfPermission(registionActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-        // Permission is not granted
-        ActivityCompat.requestPermissions(registionActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-    }
-    mFusedLocationClient.getLastLocation()
-            .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    // Got last known location. In some rare situations this can be null.
-                    if (location != null) {
-                        latitude = location.getLatitude();
-                        longitude = location.getLongitude();
-                    }
-                }
-            });
-}
-
-
+    
 
 }
