@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText name, password;
     private TextView userRegister;
-    private Button login;
+    private Button login, test;
     private String TAG = "MainActivity";
     private FirebaseAuth mAuth;
     private RadioGroup option;
@@ -53,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.loginButton);
         userRegister = findViewById(R.id.regText);
         mAuth = FirebaseAuth.getInstance();
+        test = findViewById(R.id.button);
 
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ReaderSettingsPage.class));
+            }
+        });
 
         userRegister.setOnClickListener(new View.OnClickListener() {
             @Override
