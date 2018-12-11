@@ -1,10 +1,15 @@
 package com.example.vizva.sns_app;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +22,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
@@ -45,7 +52,9 @@ public class registionActivity extends Activity {
     private RadioGroup option;
     private FirebaseAuth mAuth;
     private String user_type;
+    private double latitude, longitude;
     final String TAG = "registionActivity";
+    private FusedLocationProviderClient mFusedLocationClient;
 
 
     @Override
@@ -116,6 +125,7 @@ public class registionActivity extends Activity {
                                 Intent i = new Intent(registionActivity.this, MainActivity.class);
                                 startActivity(i);
                 }
+
             }
         });
 
@@ -129,6 +139,23 @@ public class registionActivity extends Activity {
                 startActivity(new Intent(registionActivity.this, MainActivity.class));
             }
         });
+        
+        if (ContextCompat.checkSelfPermission(registionActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            ActivityCompat.requestPermissions(registionActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                    }
+                });
     }
 
 //    @Override
@@ -459,7 +486,30 @@ class BackgroundTask extends AsyncTask<String,Void,String> {
 //    }}
 
 
+public void onSelfClick(View view){
+    regButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
+        }
+    });
+    if (ContextCompat.checkSelfPermission(registionActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+        // Permission is not granted
+        ActivityCompat.requestPermissions(registionActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+    }
+    mFusedLocationClient.getLastLocation()
+            .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                    }
+                }
+            });
+}
 
 
 
