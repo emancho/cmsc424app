@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,10 +27,11 @@ public class ReaderSettingsPage extends AppCompatActivity {
 
     private double latitude;
     private double longitude;
-    private String User, Pass, Email;
+    private String Userf, Passf, Emailf;
     private EditText user, pass, email;
     private Button submit;
     private FusedLocationProviderClient mFusedLocationClient;
+    private String TAG = "ReaderSettings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,23 +39,29 @@ public class ReaderSettingsPage extends AppCompatActivity {
         setContentView(R.layout.activity_reader_settings_page);
 
         Toast.makeText(this, "This is the Settings Feed", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "Before the LocationServices");
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        Log.i(TAG, "Find View By ID");
         user = findViewById(R.id.userText);
         pass = findViewById(R.id.passText);
         email = findViewById(R.id.emailText);
+        submit = findViewById(R.id.confirmButton);
+        Log.i(TAG, "Click Listener");
         submit.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
-                  User = user.getText().toString();
-                  Pass = pass.getText().toString();
-                  Email = email.getText().toString();
+                  Log.i(TAG, "inside the onclick after the submit button has been hit");
+                  Userf = user.getText().toString();
+                  Passf = pass.getText().toString();
+                  Emailf = email.getText().toString();
               }
           }
         );
-
+        Log.i(TAG, "Finishes on create");
     }
 
     public void onMapSearch(View view) {
+        Log.i(TAG, "In the onMapSearch method");
         EditText locationSearch = findViewById(R.id.coordinatesText);
         String location = locationSearch.getText().toString();
         List<Address> addressList = null;
@@ -72,9 +80,13 @@ public class ReaderSettingsPage extends AppCompatActivity {
             longitude = latLng.longitude;
             locationSearch.setText(latitude+", "+longitude);
         }
+        Log.i(TAG, "At the end of the onMapSearch");
     }
 
     public void onSelfClick(View view){
+
+
+        Log.i(TAG, "inside the onSelfClick method");
         EditText locationSearch = findViewById(R.id.coordinatesText);
         if (ContextCompat.checkSelfPermission(ReaderSettingsPage.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -93,5 +105,7 @@ public class ReaderSettingsPage extends AppCompatActivity {
                     }
                 });
         locationSearch.setText(latitude+", "+longitude);
+
+        Log.i(TAG, "At the end of the onSelfClick");
     }
 }
